@@ -1,0 +1,75 @@
+# Configuration for QuickDraw Sketch Classification
+
+# Data 
+data:
+  raw_dir: "quickdraw_images_dedup"
+  processed_dir: "data/processed"
+  max_per_class: 5000
+  validation_split: 0.2
+  val_test_split_ratio: 0.5 
+  
+# Image
+image:
+  size: [128, 128]
+  channels: 3
+
+# Training 
+training:
+  batch_size: 128
+  epochs: 50
+  seed: 42
+  
+# Model 
+model:
+  l2_weight: 5.0e-5
+  dropout: 0.3
+  dense_units: 512
+  
+# Optimizer 
+optimizer:
+  type: "adam"
+  learning_rate: 1.0e-4
+  clipnorm: 1.0
+  
+# Loss 
+loss:
+  label_smoothing: 0.05
+  
+# Augmentation
+augmentation:
+  mixup_alpha: 0.0  
+  random_flip: true
+  brightness_delta: 0.1
+  contrast_range: [0.9, 1.1]
+  
+# Callbacks 
+callbacks:
+  early_stopping:
+    monitor: "val_accuracy"
+    patience: 7
+    restore_best_weights: true
+  reduce_lr:
+    monitor: "val_loss"
+    factor: 0.5
+    patience: 3
+    min_lr: 1.0e-7
+  model_checkpoint:
+    monitor: "val_accuracy"
+    save_best_only: true
+    
+# Output 
+output:
+  models_dir: "outputs/models"
+  logs_dir: "outputs/logs"
+  plots_dir: "outputs/plots"
+  history_dir: "outputs/history"
+  final_model_name: "quickdraw_scratch_final.keras"
+  checkpoint_name: "best_scratch_ckpt.keras"
+  
+# Evaluation 
+evaluation:
+  top_k: 3 
+  confusion_matrix: true
+  per_class_metrics: true
+  visualize_predictions: true
+  samples_per_class_viz: 5

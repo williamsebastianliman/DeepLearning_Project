@@ -1,0 +1,14 @@
+Training Summary
+Timestamp: 2025-12-14 18:42:34
+Duration: 111.54 minutes
+Epochs completed: 36
+
+Final Metrics:
+Train Loss: 0.8347
+Train Accuracy: 0.8827
+Val Loss: 0.8709
+Val Accuracy: 0.8662
+
+Best Metrics:
+Best Val Accuracy: 0.8730
+Best Val Loss: 0.8470
